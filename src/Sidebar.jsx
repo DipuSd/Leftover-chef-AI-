@@ -14,7 +14,7 @@ function Sidebar() {
     <div
       className={`${
         sidebarOpen ? "w-64" : "w-20"
-      } bg-white shadow-md transition-all duration-300 fixed h-screen flex flex-col`}
+      } bg-white shadow-md transition-all duration-300 fixed h-screen`}
     >
       <div className="p-4 flex items-center justify-between">
         {sidebarOpen && <h1 className="text-xl font-bold">Menu</h1>}
