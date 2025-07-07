@@ -17,7 +17,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
       <div className="p-4 flex items-center justify-between">
         {sidebarOpen && <h1 className="text-xl font-bold">Menu</h1>}
         <button
-          className="p-2 rounded-lg hover:bg-gra-100"
+          className="p-2 rounded-lg hover:bg-gra-100 cursor-pointer"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           <FiMenu size={24} />
