@@ -1,9 +1,7 @@
-import React, { useState } from "react";
 import { FiMenu, FiHome, FiGrid, FiPlusCircle, FiZap } from "react-icons/fi";
 import NavItems from "./NavItems";
 
-function Sidebar() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+function Sidebar({ sidebarOpen, setSidebarOpen }) {
   const navItems = [
     { icon: <FiHome />, label: "Home" },
     { icon: <FiGrid />, label: "Dashboard" },

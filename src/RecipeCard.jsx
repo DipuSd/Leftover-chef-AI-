@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiBookmark, FiHeart } from "react-icons/fi";
 
-function RecipeCard({ id, title, description, hasImage }) {
+function RecipeCard({ id, title, description, hasImage, imgUrl }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -9,11 +9,12 @@ function RecipeCard({ id, title, description, hasImage }) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden mb-4 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
       {hasImage && (
-        <div
-          className="h-48 bg-cover bg-center cursor pointer"
-          style={{ backgroundImage: "url(srcassetssample-food.jpg)" }}
+        <img
+          src={imgUrl}
+          alt={title}
+          className="w-full h-48 object-cover cursor-pointer"
           onClick={() => setIsExpanded(!isExpanded)}
-        ></div>
+        />
       )}
       <div className="p-4">
         <h3
