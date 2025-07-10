@@ -6,6 +6,6 @@ import GenerateRecipePage from "./pages/recipe generation/GenerateRecipePage.jsx
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <GenerateRecipePage />
+    <App />
   </StrictMode>
 );

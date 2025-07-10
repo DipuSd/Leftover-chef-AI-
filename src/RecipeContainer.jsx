@@ -11,6 +11,11 @@ function RecipeContainer({ recipes }) {
           description={recipe.description}
           hasImage={recipe.hasImage}
           imgUrl={recipe.imgUrl}
+          category={recipe.category}
+          origin={recipe.origin}
+          instructions={recipe.instructions}
+          cookingTime={recipe.cookingTime}
+          initialLikes={recipe.initialLikes}
         />
       ))}
     </div>
