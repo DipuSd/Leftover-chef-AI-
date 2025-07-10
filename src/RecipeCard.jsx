@@ -12,6 +12,8 @@ function RecipeCard({
   instructions,
   cookingTime,
   initialLikes,
+  userProfilePic,
+  userName,
 }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -38,6 +40,14 @@ function RecipeCard({
         />
       )}
       <div className="p-4">
+        <div className="flex items-center mb-3">
+          <img
+            src={userProfilePic}
+            alt={userName}
+            className="w-8 h-8 rounded-full object-cover mr-2"
+          />
+          <span className="text-sm font-medium text-gray-700">{userName}</span>
+        </div>
         <div className="flex justify-between items-start">
           <div>
             <h3
