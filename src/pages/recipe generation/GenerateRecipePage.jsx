@@ -1,6 +1,7 @@
 import Navbar from "../../Navbar";
 import Sidebar from "../../Sidebar";
 import RecipeGenerationCard from "./RecipeGenerationCard";
+import UserInputSection from "./UserInpuSection";
 import React, { useState } from "react";
 
 function GenerateRecipePage() {
@@ -27,19 +28,10 @@ function GenerateRecipePage() {
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <div className="flex flex-1">
-          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-          <div className="flex-1 flex justify-center">
-            <main>
-              <RecipeGenerationCard
-                title={demoGeneratedRecipe[0].title}
-                category={demoGeneratedRecipe[0].category}
-                origin={demoGeneratedRecipe[0].origin}
-                description={demoGeneratedRecipe[0].description}
-                cookingTime={demoGeneratedRecipe[0].cookingTime}
-                instructions={demoGeneratedRecipe[0].instructions}
-              />
-            </main>
-          </div>
+          {/* <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */}
+          <main className="flex-1 p-6 overflow-y-auto">
+            <UserInputSection />
+          </main>
         </div>
       </div>
     </>
