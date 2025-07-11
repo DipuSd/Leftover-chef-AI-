@@ -129,6 +129,7 @@ function DashBoardPage() {
           <DashBoardContent
             createdRecipes={createRecipes}
             savedRecipes={savedRecipes}
+            sidebarOpen={sidebarOpen}
           />
         </main>
       </div>

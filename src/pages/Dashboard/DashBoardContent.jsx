@@ -2,7 +2,7 @@ import RecipeCard from "../../RecipeCard";
 import RecipeGenerationCard from "../recipeGeneration/RecipeGenerationCard";
 import { FiEdit3 } from "react-icons/fi";
 
-function DashBoardContent({ createdRecipes, savedRecipes }) {
+function DashBoardContent({ createdRecipes, savedRecipes, sidebarOpen }) {
   return (
     <div className="flex-1 p-6">
       <div className="flex flex-col md:flex-row gap-6">
@@ -12,7 +12,9 @@ function DashBoardContent({ createdRecipes, savedRecipes }) {
               <img
                 src="src/assets/robot_chef.png"
                 alt="profile placeholder"
-                className="w-20 h-20 rounded-full object-cover"
+                className={`${
+                  sidebarOpen ? "md:w-12 md:h-12 lg:w-20 lg:h-20" : "w-20 h-20"
+                } rounded-full object-cover transition-all duration-300`}
               />
               <div>
                 <h1 className="text-2xl font-bold">John Doe</h1>
@@ -20,7 +22,11 @@ function DashBoardContent({ createdRecipes, savedRecipes }) {
               </div>
               <button
                 onClick="#"
-                className="bg-blue-600 rounded-md text-white px-4 py-2 hover:bg-blue-700 cursor-pointer ml-auto"
+                className={`bg-blue-600 rounded-md text-white px-4 py-2 hover:bg-blue-700 ml-auto ${
+                  sidebarOpen
+                    ? "md:invisible md:cursor-not-allowed md:pointer-events-none lg:visible lg:cursor-pointer lg:pointer-events-auto"
+                    : ""
+                }`}
               >
                 <FiEdit3 size={18} />
               </button>
