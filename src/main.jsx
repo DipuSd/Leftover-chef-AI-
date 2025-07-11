@@ -2,10 +2,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import GenerateRecipePage from "./pages/recipe generation/GenerateRecipePage.jsx";
+import DashBoardPage from "./pages/Dashboard/DashBoardPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <DashBoardPage />
   </StrictMode>
 );
