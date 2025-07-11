@@ -8,8 +8,9 @@ function RecipeGenerationCard({
   description,
   instructions,
   cookingTime,
+  isBookMarked = false,
 }) {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(isBookMarked);
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
       <div className="p-5">

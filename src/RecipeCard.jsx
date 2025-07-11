@@ -14,9 +14,10 @@ function RecipeCard({
   initialLikes,
   userProfilePic,
   userName,
+  isBookMarked = false,
 }) {
   const [isLiked, setIsLiked] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(isBookMarked);
   const [isExpanded, setIsExpanded] = useState(false);
   const [likeCount, setLikeCount] = useState(initialLikes);
 

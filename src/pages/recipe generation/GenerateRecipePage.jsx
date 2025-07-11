@@ -21,7 +21,7 @@ function GenerateRecipePage() {
             />
           </div>
           <main
-            className={`flex-1 p-6 overflow-y-auto transition-all duration-300 ${
+            className={` p-6 overflow-y-auto transition-all duration-300 ${
               sidebarOpen ? "md:ml-5 lg:ml-0" : " "
             }`}
           >
