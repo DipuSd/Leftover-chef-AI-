@@ -19,6 +19,7 @@ function DashBoardPage() {
       initialLikes: 25,
       userProfilePic: "src/assets/robot_chef.png",
       userName: "John doe",
+      needTrashIcon: true,
     },
     {
       id: 2,
@@ -33,6 +34,7 @@ function DashBoardPage() {
       initialLikes: 13,
       userProfilePic: "src/assets/robot_chef.png",
       userName: "Jane doe",
+      needTrashIcon: true,
     },
     {
       id: 3,
@@ -47,6 +49,7 @@ function DashBoardPage() {
       initialLikes: 12,
       userProfilePic: "src/assets/robot_chef.png",
       userName: "Jane doe",
+      needTrashIcon: true,
     },
   ];
 

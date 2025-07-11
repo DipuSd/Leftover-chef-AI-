@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiBookmark, FiHeart } from "react-icons/fi";
+import { FiBookmark, FiHeart, FiTrash2 } from "react-icons/fi";
 
 function RecipeCard({
   id,
@@ -11,10 +11,11 @@ function RecipeCard({
   origin,
   instructions,
   cookingTime,
-  initialLikes,
+  initialLikes = 0,
   userProfilePic,
   userName,
   isBookMarked = false,
+  needTrashIcon = false,
 }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(isBookMarked);
@@ -65,12 +66,19 @@ function RecipeCard({
                 ? "text-yellow-500"
                 : "text-gray-500 hover:text-yellow-500"
             } cursor-pointer`}
-            onClick={() => setIsBookmarked(!isBookmarked)}
+            onClick={() => {
+              if (needTrashIcon) {
+                // Delete action
+              } else {
+                setIsBookmarked(!isBookmarked);
+              }
+            }}
           >
-            <FiBookmark
-              className={isBookmarked ? "fill-current" : " "}
-              size={18}
-            />
+            {needTrashIcon ? (
+              <FiTrash2 className="hover:text-red-500" />
+            ) : (
+              <FiBookmark className={isBookmarked ? "fill-current" : ""} />
+            )}
           </button>
         </div>
         <div className="mt-4 space-y-3">

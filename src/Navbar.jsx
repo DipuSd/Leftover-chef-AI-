@@ -1,3 +1,5 @@
+import { FiEdit } from "react-icons/fi";
+
 function Navbar() {
   return (
     <nav className="bg-white shadow-md py-2 px-4 sticky top-0 z-50">
@@ -19,9 +21,12 @@ function Navbar() {
             className="w-full px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <div>
+        <div className="flex justify-between gap-2">
           <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 cursor-pointer">
             Login
+          </button>
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 cursor-pointer">
+            <FiEdit size={18} />
           </button>
         </div>
       </div>
