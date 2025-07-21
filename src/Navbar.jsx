@@ -1,10 +1,13 @@
-import { FiEdit } from "react-icons/fi";
+import { FiEdit, FiEdit3 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import LoginPopup from "./LoginPopup";
 import RecipeCreationPopup from "./RecipeCreationPopup";
+import { useLocation } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ onSubmit }) {
+  const Logo = "/robot_chef.png";
+  const location = useLocation();
   const navigate = useNavigate();
   const [showLoginPopUp, setLoginPopUp] = useState(false);
   const [showRecipePopup, setRecipePopUp] = useState(false);
@@ -20,11 +23,7 @@ function Navbar() {
             className="flex items-center space-x-2 cursor-pointer"
             onClick={handleLogoClick}
           >
-            <img
-              src="src\assets\robot_chef.png"
-              alt="robot chef"
-              className="h-10 w-10"
-            />
+            <img src={Logo} alt="robot chef" className="h-10 w-10" />
             <span className="text-xl font-bold text-gray-800">
               Leftover Chef (AI)
             </span>
@@ -37,18 +36,32 @@ function Navbar() {
             />
           </div>
           <div className="flex justify-between gap-2">
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 cursor-pointer"
-              onClick={() => setLoginPopUp(true)}
-            >
-              Login
-            </button>
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 cursor-pointer"
-              onClick={() => setRecipePopUp(true)}
-            >
-              <FiEdit size={18} />
-            </button>
+            {location.pathname == "/" && (
+              <>
+                <button
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 cursor-pointer"
+                  onClick={() => setLoginPopUp(true)}
+                >
+                  Login
+                </button>
+                <button
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-300 cursor-pointer flex justify-between gap-1 items-center"
+                  onClick={() => setRecipePopUp(true)}
+                >
+                  <FiEdit size={18} />
+                  <span className="text-m">Create</span>
+                </button>
+              </>
+            )}
+            {location.pathname == "/dashboard" && (
+              <button
+                onClick="#"
+                className="bg-blue-600 rounded-md text-white px-4 py-2 hover:bg-blue-700 ml-auto cursor-pointer flex justify-between gap-2 items-center"
+              >
+                <FiEdit3 size={18} />
+                <span className="text-m">Edit</span>
+              </button>
+            )}
           </div>
         </div>
       </nav>
@@ -59,6 +72,7 @@ function Navbar() {
       <RecipeCreationPopup
         isOpen={showRecipePopup}
         onClose={() => setRecipePopUp(false)}
+        onCreate={onSubmit}
       />
     </>
   );

@@ -3,6 +3,39 @@ import React, { useState } from "react";
 
 function RecipeContainer({ recipes }) {
   const [cookingTime, setCookingTime] = useState(20);
+  const [filters, setFilters] = useState({
+    category: "",
+    origin: "",
+    cookingTime: 120,
+    minLikes: 0,
+  });
+
+  const handleFilterChange = (e) => {
+    const { id, value } = e.target;
+    setFilters((prev) => ({
+      ...prev,
+      [id]: id == "cookingTime" || id === "minLikes" ? parseInt(value) : value,
+    }));
+  };
+
+  const filteredRecipes = recipes.filter((recipe) => {
+    return (
+      (filters.category === "" ||
+        recipe.category.toLowerCase() === filters.category) &&
+      (filters.origin === "" || recipe.origin === filters.origin) &&
+      parseInt(recipe.cookingTime) <= filters.cookingTime &&
+      recipe.initialLikes >= filters.minLikes
+    );
+  });
+
+  const resetFilters = () => {
+    setFilters({
+      category: "",
+      origin: "",
+      cookingTime: 120,
+      minLikes: 0,
+    });
+  };
 
   return (
     <div className="space-y-6">
@@ -15,6 +48,8 @@ function RecipeContainer({ recipes }) {
             </label>
             <select
               id="category"
+              value={filters.category}
+              onChange={handleFilterChange}
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="">All Categories</option>
@@ -29,6 +64,8 @@ function RecipeContainer({ recipes }) {
             </label>
             <select
               id="origin"
+              value={filters.origin}
+              onChange={handleFilterChange}
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="">All Country</option>
@@ -42,7 +79,7 @@ function RecipeContainer({ recipes }) {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Max Cooking Time: {cookingTime} min
+              Max Cooking Time: {filters.cookingTime} min
             </label>
             <input
               type="range"
@@ -50,8 +87,8 @@ function RecipeContainer({ recipes }) {
               min="10"
               max="120"
               step="5"
-              value={cookingTime}
-              onChange={(e) => setCookingTime(parseInt(e.target.value))}
+              value={filters.cookingTime}
+              onChange={handleFilterChange}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-800"
             />
             <div className="flex justify-between text-xs text-gray-500 mt-1">
@@ -64,10 +101,12 @@ function RecipeContainer({ recipes }) {
               Minimum Likes
             </label>
             <select
-              id="likes"
+              id="minLikes"
+              value={filters.minLikes}
+              onChange={handleFilterChange}
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
-              <option value=" ">Any</option>
+              <option value="0">Any</option>
               <option value="10">10+ Likes</option>
               <option value="50">50+ Likes</option>
               <option value="100">100+ Likes</option>
@@ -77,13 +116,7 @@ function RecipeContainer({ recipes }) {
         </div>
         <div className="flex justify-center space-x-4 mt-4">
           <button
-            onClick="#"
-            className=" md:w-full lg:w-80 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white focus:outline-none cursor-pointer mt-5"
-          >
-            Apply Filters
-          </button>
-          <button
-            onClick="#"
+            onClick={resetFilters}
             className=" md:w-full lg:w-80 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white focus:outline-none cursor-pointer mt-5"
           >
             Reset Filters
@@ -91,7 +124,7 @@ function RecipeContainer({ recipes }) {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-6">
-        {recipes.map((recipe) => (
+        {filteredRecipes.map((recipe) => (
           <RecipeCard
             key={recipe.id}
             id={recipe.id}

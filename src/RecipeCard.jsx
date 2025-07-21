@@ -16,6 +16,8 @@ function RecipeCard({
   userName,
   isBookMarked = false,
   needTrashIcon = false,
+  onDelete,
+  onRemoveBookmark,
 }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(isBookMarked);
@@ -29,6 +31,23 @@ function RecipeCard({
       setLikeCount((prev) => prev + 1);
     }
     setIsLiked(!isLiked);
+  };
+
+  const handleDelete = () => {
+    if (
+      window.confirm(
+        "Are you sure you would like to delete this created recipe"
+      )
+    ) {
+      onDelete();
+    }
+  };
+  const handleBookmarkCick = () => {
+    const newBookmarkState = !isBookmarked;
+    setIsBookmarked(newBookmarkState);
+    if (!newBookmarkState && onRemoveBookmark) {
+      onRemoveBookmark();
+    }
   };
 
   return (
@@ -68,9 +87,9 @@ function RecipeCard({
             } cursor-pointer`}
             onClick={() => {
               if (needTrashIcon) {
-                // Delete action
+                handleDelete();
               } else {
-                setIsBookmarked(!isBookmarked);
+                handleBookmarkCick();
               }
             }}
           >

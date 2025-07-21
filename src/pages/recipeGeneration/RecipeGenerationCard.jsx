@@ -9,8 +9,17 @@ function RecipeGenerationCard({
   instructions,
   cookingTime,
   isBookMarked = false,
+  onRemove,
 }) {
   const [isBookmarked, setIsBookmarked] = useState(isBookMarked);
+
+  const handleBookMarkClick = () => {
+    if (isBookmarked && onRemove) {
+      onRemove();
+    }
+    setIsBookmarked(!isBookmarked);
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden mb-6 border border-gray-200 hover:shadow-lg transition-shadow duration-200">
       <div className="p-5">
@@ -35,7 +44,7 @@ function RecipeGenerationCard({
                 ? "text-yellow-500"
                 : "text-gray-500 hover:text-yellow-500"
             } cursor-pointer`}
-            onClick={() => setIsBookmarked(!isBookmarked)}
+            onClick={handleBookMarkClick}
           >
             <FiBookmark
               className={isBookmarked ? "fill-current" : ""}

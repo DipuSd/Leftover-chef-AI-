@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FiX, FiPlus, FiClock, FiImage } from "react-icons/fi";
 
-function RecipeCreationPopup({ isOpen, onClose }) {
+function RecipeCreationPopup({ isOpen, onClose, onCreate }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("vegetarian");
@@ -40,7 +40,8 @@ function RecipeCreationPopup({ isOpen, onClose }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({
+    console.log(onCreate);
+    const newRecipe = {
       title,
       description,
       category,
@@ -48,8 +49,17 @@ function RecipeCreationPopup({ isOpen, onClose }) {
       steps,
       cookingTime,
       image,
-    });
+    };
+    console.log(newRecipe);
+    onCreate(newRecipe);
     onClose();
+    setTitle("");
+    setDescription("");
+    setCategory("Vegetarian");
+    setOrigin("");
+    setSteps([]);
+    setCookingTime(30);
+    setImage(null);
   };
   if (!isOpen) {
     return null;

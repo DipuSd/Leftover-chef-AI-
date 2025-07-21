@@ -5,14 +5,16 @@ import FeaturedContainer from "./FeaturedContainer";
 import React, { useState } from "react";
 
 function App() {
+  const sampleFood = "/sample-food.jpg";
+  const sampleProfile = "/robot_chef.png";
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const recipes = [
+  const [recipes, setRecipes] = useState([
     {
       id: 1,
       title: "Vegetable Stir Fry",
       description: "Quick and healthy vegetable dish ready in 15 minutes...",
       hasImage: true,
-      imgUrl: "src/assets/sample-food.jpg",
+      imgUrl: sampleFood,
       category: "Vegetarian",
       origin: "Italian",
       instructions: [
@@ -22,8 +24,8 @@ function App() {
         "Add sauce and serve",
       ],
       cookingTime: "20 mins",
-      initialLikes: 45,
-      userProfilePic: "src/assets/robot_chef.png",
+      initialLikes: 55,
+      userProfilePic: sampleProfile,
       userName: "Jane Doe",
     },
     {
@@ -41,7 +43,7 @@ function App() {
       ],
       cookingTime: "30 mins",
       initialLikes: 30,
-      userProfilePic: "src/assets/robot_chef.png",
+      userProfilePic: sampleProfile,
       userName: "John Doe",
     },
     {
@@ -49,7 +51,7 @@ function App() {
       title: "Vegetable Stir Fry",
       description: "Quick and healthy vegetable dish ready in 15 minutes...",
       hasImage: true,
-      imgUrl: "src/assets/sample-food.jpg",
+      imgUrl: sampleFood,
       category: "Vegetarian",
       origin: "Italian",
       instructions: [
@@ -60,11 +62,11 @@ function App() {
       ],
       cookingTime: "20 mins",
       initialLikes: 45,
-      userProfilePic: "src/assets/robot_chef.png",
+      userProfilePic: sampleProfile,
       userName: "Jane Doe",
     },
     {
-      id: 2,
+      id: 4,
       title: "Overnight Oats",
       description: "Perfect make-ahead breakfast with endless variations...",
       hasImage: false,
@@ -78,19 +80,42 @@ function App() {
       ],
       cookingTime: "30 mins",
       initialLikes: 30,
-      userProfilePic: "src/assets/robot_chef.png",
+      userProfilePic: sampleProfile,
       userName: "John Doe",
     },
-  ];
+  ]);
+
   const featuredItems = [
     { title: "5-Minute Breakfast Ideas", likes: 4200 },
     { title: "Vegetarian Meal Prep", likes: 3800 },
     { title: "One-Pot Pasta Recipes", likes: 3500 },
   ];
+
+  function addNewRecipe(newRecipe) {
+    const newId = Math.max(...recipes.map((recipe) => recipe.id), 0) + 1;
+    setRecipes((prevRecipes) => [
+      ...prevRecipes,
+      {
+        id: newId,
+        title: newRecipe.title,
+        description: newRecipe.description,
+        hasImage: Boolean(newRecipe.image),
+        imgUrl: newRecipe.image || " ",
+        category: newRecipe.category,
+        origin: newRecipe.origin,
+        instructions: newRecipe.steps,
+        cookingTime: `${newRecipe.cookingTime} mins`,
+        initialLikes: 0,
+        userProfilePic: sampleProfile,
+        userName: "DemoUser",
+      },
+    ]);
+  }
+
   return (
     <>
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        <Navbar onSubmit={addNewRecipe} />
         <div className="flex flex-1">
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           <div className="flex-1 flex justify-center lg:ml-80">

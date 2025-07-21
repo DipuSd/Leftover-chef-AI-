@@ -41,8 +41,8 @@ function QuickTipsPage() {
       <div className="flex flex-1">
         <div
           className={`${
-            sidebarOpen ? "md:w-64 lg:w-64" : "md:w-20 lg:w-20"
-          } transition-all duration-300`}
+            sidebarOpen ? "md:w-64" : "md:w-20"
+          } transition-all duration-300 lg:absolute lg:left-0 lg:z-10`}
         >
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         </div>

@@ -4,20 +4,22 @@ import DashBoardContent from "./DashBoardContent";
 import React, { useState } from "react";
 
 function DashBoardPage() {
+  const ProfilePic = "/robot_chef.png";
+  const CoverImage = "/sample-food.jpg";
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const createRecipes = [
+  const [createdRecipes, setCreatedRecipes] = useState([
     {
       id: 1,
       title: "Home made pizza",
       description: "Delicious homemade pizza with fresh ingredients",
       hasImage: true,
-      imgUrl: "src/assets/sample-food.jpg",
+      imgUrl: CoverImage,
       category: "Vegetarian",
       origin: "Italian",
       instructions: ["Make dough", "Add toppings", "Bake at 400°F"],
       cookingTime: "45 min",
       initialLikes: 25,
-      userProfilePic: "src/assets/robot_chef.png",
+      userProfilePic: ProfilePic,
       userName: "John doe",
       needTrashIcon: true,
     },
@@ -26,13 +28,13 @@ function DashBoardPage() {
       title: "Home made pizza",
       description: "Delicious homemade pizza with fresh ingredients",
       hasImage: false,
-      imgUrl: "src/assets/sample-food.jpg",
+      imgUrl: CoverImage,
       category: "Vegetarian",
       origin: "Italian",
       instructions: ["Make dough", "Add toppings", "Bake at 400°F"],
       cookingTime: "45 min",
       initialLikes: 13,
-      userProfilePic: "src/assets/robot_chef.png",
+      userProfilePic: ProfilePic,
       userName: "Jane doe",
       needTrashIcon: true,
     },
@@ -41,19 +43,19 @@ function DashBoardPage() {
       title: "Home made pizza",
       description: "Delicious homemade pizza with fresh ingredients",
       hasImage: true,
-      imgUrl: "src/assets/sample-food.jpg",
+      imgUrl: CoverImage,
       category: "Vegetarian",
       origin: "Italian",
       instructions: ["Make dough", "Add toppings", "Bake at 400°F"],
       cookingTime: "45 min",
       initialLikes: 12,
-      userProfilePic: "src/assets/robot_chef.png",
+      userProfilePic: ProfilePic,
       userName: "Jane doe",
       needTrashIcon: true,
     },
-  ];
+  ]);
 
-  const savedRecipes = [
+  const [savedRecipes, setSavedRecipes] = useState([
     {
       id: 1,
       title: "AI-generated Pasta",
@@ -70,13 +72,13 @@ function DashBoardPage() {
       title: "Home made pizza",
       description: "Delicious homemade pizza with fresh ingredients",
       hasImage: true,
-      imgUrl: "src/assets/sample-food.jpg",
+      imgUrl: CoverImage,
       category: "Vegetarian",
       origin: "Italian",
       instructions: ["Make dough", "Add toppings", "Bake at 400°F"],
       cookingTime: "45 min",
       initialLikes: 25,
-      userProfilePic: "src/assets/robot_chef.png",
+      userProfilePic: ProfilePic,
       userName: "John doe",
       isAiGenerated: false,
       isBookMarked: true,
@@ -97,18 +99,30 @@ function DashBoardPage() {
       title: "Home made pizza",
       description: "Delicious homemade pizza with fresh ingredients",
       hasImage: true,
-      imgUrl: "src/assets/sample-food.jpg",
+      imgUrl: CoverImage,
       category: "Vegetarian",
       origin: "Italian",
       instructions: ["Make dough", "Add toppings", "Bake at 400°F"],
       cookingTime: "45 min",
       initialLikes: 25,
-      userProfilePic: "src/assets/robot_chef.png",
+      userProfilePic: ProfilePic,
       userName: "John doe",
       isAiGenerated: false,
       isBookMarked: true,
     },
-  ];
+  ]);
+
+  const handleDeleteRecipe = (recipeId) => {
+    setCreatedRecipes((prevRecipe) =>
+      prevRecipe.filter((recipe) => recipe.id !== recipeId)
+    );
+  };
+
+  const handleRemoveSavedRecipe = (recipeId) => {
+    setSavedRecipes((prevRecipe) =>
+      prevRecipe.filter((recipe) => recipe.id !== recipeId)
+    );
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -127,9 +141,11 @@ function DashBoardPage() {
           }`}
         >
           <DashBoardContent
-            createdRecipes={createRecipes}
+            createdRecipes={createdRecipes}
             savedRecipes={savedRecipes}
             sidebarOpen={sidebarOpen}
+            onDeleteRecipe={handleDeleteRecipe}
+            onRemoveSavedRecipe={handleRemoveSavedRecipe}
           />
         </main>
       </div>
